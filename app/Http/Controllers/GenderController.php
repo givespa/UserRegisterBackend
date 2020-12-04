@@ -8,18 +8,20 @@ use Illuminate\Http\Request;
 
 class GenderController extends Controller
 {
-        /**
+            /**
      * @param Request $request
      * @return JsonResponse
      * Método obtener los generos.
-     * Recibe como parámetro opcional: ('gender_id').
+     * Recibe como parámetros el siguientes: id
      * @author Gian Vespa
      */
-    public function get(Request $request): JsonResponse
+    public function get($id = false): JsonResponse
     {
-        if ($request->gender_id){
-            $gender = Gender::whereId($request->gender_id)->get();
+        // buscar usuario por id
+        if ($id){
+            $gender = Gender::whereId($id)->get();
         }else{
+        // buscar todo los usuarios
             $gender = Gender::all();
         }
         return response()->json($gender, 200);
